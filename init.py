@@ -185,6 +185,7 @@ def rgba_image_to_svg_pixels(im, opaque=None):
 def main():
     image = Image.open('examples/angular.png').convert('RGBA')
     svg_image = rgba_image_to_svg_contiguous(image)
+    print('Attempting to export the SVG image to PNG')
     #svg_image = rgba_image_to_svg_pixels(image)
     with open("examples/angular.svg", "w") as text_file:
         text_file.write(svg_image)
