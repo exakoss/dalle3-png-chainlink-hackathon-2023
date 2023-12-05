@@ -1,7 +1,2 @@
-POST http://127.0.0.1:5000/post-generate-svg HTTP/1.1
+GET http://127.0.0.1:5000/get-generate-svg?meleeAttack=10&meleeDefense=10 HTTP/1.1
 content-type: application/json
-
-{
-    "meleeAttack": "16",
-    "meleeDefense": "16"
-}

@@ -18,16 +18,15 @@ app = Flask(__name__)
 def home():
     return "Hello, World!"
 
-@app.route('/post-generate-svg', methods=['POST'])
+@app.route('/get-generate-svg', methods=['GET'])
 def generatePNGandReturnSVG():
-    data = request.json
-    print(data)
 
-    attack = data['meleeAttack']
-    defense = data['meleeDefense']
+    attack = request.args.get('meleeAttack', default='0', type=str)
+    defense = request.args.get('meleeDefense', default='0', type=str)
+
     print('Attempting to generate a SVG image with attack ' + attack + ' and defense ' + defense)
 
-    svg_prompt = "Generate a 256x256 image of a battle wizard in gaming pixel art style. The image must reflect battle capabilities of the wizard, he has to have a weapon in one hand and a spell book in another hand. This wizard has 2 stats -- melee attack and melee defense, each of them has a maximum value of 20. The bigger is the stat, the more the wizard's appearance should reflect. This wizard has " + attack + " melee attack and " + defense + " melee defense."
+    svg_prompt = "Generate a 256x256 image of a battle wizard in gaming pixel art style. The image must reflect battle capabilities of the wizard, he has to have a weapon in one hand and a spell book in another hand. This wizard has 2 stats -- melee attack and melee defense, each of them has a maximum value of 20. The bigger is the stat, the more the wizard's appearance should reflect its battle capabilities in the respective department. This particular wizard has " + attack + " melee attack and " + defense + " melee defense."
     response = client.images.generate(
         model="dall-e-2",
         prompt=svg_prompt,
